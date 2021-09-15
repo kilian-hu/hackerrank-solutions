@@ -1,0 +1,10 @@
+8
+2
+setPassword a
+authorize 97
+authorize 12756
+authorize 12804
+authorize 12829
+authorize 12772
+authorize 12797
+authorize 98

@@ -1,0 +1,7 @@
+5
+2
+setPassword 1
+setPassword 2
+setPassword 3
+authorize 49
+authorize 50
