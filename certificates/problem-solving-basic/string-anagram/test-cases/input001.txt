@@ -1,0 +1,14 @@
+8
+listen
+tow
+silent
+lisent
+two
+abc
+no
+on
+4
+two
+bca
+no
+listen
