@@ -17,51 +17,40 @@ import (
  */
 // optimized
 func maxSubarrayValue(arr []int32) int32 {
-	var maxP int32 = 0
-	var sum int32 = 0
-	size := len(arr)
-	for i := 0; i < size; i++ {
+	var max_p, max_n, sum_p, sum_n int32
+
+	for i := 0; i < len(arr); i++ {
 		val := arr[i]
-		if i%2 == 0 {
+		if i%2 != 0 {
 			val = -val
 		}
-
-		if val <= sum+val {
-			sum += val
+		// for positive
+		if val <= sum_p+val {
+			sum_p += val
 		} else {
-			sum = val
+			sum_p = val
 		}
-		if sum > maxP {
-			maxP = sum
+		if sum_p > max_p {
+			max_p = sum_p
 		}
-	}
-
-	var maxN int32 = 0
-	sum = 0
-	for i := 0; i < size; i++ {
-		val := arr[i]
-		if i%2 == 0 {
-			val = -val
-		}
-
-		if val >= sum+val {
-			sum += val
+		// for negative
+		if val >= sum_n+val {
+			sum_n += val
 		} else {
-			sum = val
+			sum_n = val
 		}
-		if sum < maxN {
-			maxN = sum
+		if sum_n < max_n {
+			max_n = sum_n
 		}
-
 	}
 
-	maxP = maxP * maxP
-	maxN = maxN * maxN
+	max_p = max_p * max_p
+	max_n = max_n * max_n
 
-	if maxP < maxN {
-		return maxN
+	if max_p > max_n {
+		return max_p
 	}
-	return maxP
+	return max_n
 }
 
 func main() {

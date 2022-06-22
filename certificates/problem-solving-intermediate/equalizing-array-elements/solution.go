@@ -58,8 +58,6 @@ func minOperations(args []int32) int32 {
 				move += v[i][j]
 			}
 
-			//fmt.Println(i, v[i], move)
-
 			// Update answer
 			if ans > move {
 				ans = move

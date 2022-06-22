@@ -5,55 +5,6 @@ import (
 	"testing"
 )
 
-// func findCountRough(args []int32) (cnt int32) {
-// 	var size = len(args)
-// 	if size < 3 {
-// 		return -1
-// 	}
-// 	thr, div := args[size-2], args[size-1]
-// 	size -= 2
-// 	if size < int(thr) {
-// 		return -1
-// 	}
-// 	arr := args[:size]
-// 	// var scope [][]int32
-// 	// var flatten map[int32]int32
-// 	var ops = make(map[int32]int32)
-// 	var cnts = make(map[int32]int32)
-// 	// var flatten []int32
-// 	for i := 0; i < size; i++ {
-// 		// var childs []int32
-// 		val := arr[i]
-// 		// childs = append(childs, val)
-// 		var depth int32 = 0
-// 		cnts[val]++
-// 		for val > 0 {
-// 			val = int32(val / div)
-// 			depth++
-// 			ops[val] += depth
-// 			cnts[val]++
-// 			// childs = append(childs, val)
-// 		}
-// 		// scope = append(scope, childs)
-// 		// flatten = append(flatten, childs...)
-// 	}
-// 	fmt.Println(cnts)
-// 	fmt.Println(ops)
-// 	// var answers []int32
-// 	var minOps int32 = 1_000_000_000
-// 	for k, v := range cnts {
-// 		if v >= thr {
-// 			// fmt.Println(k, v, ops[k])
-// 			if minOps > ops[k] {
-// 				minOps = ops[k]
-// 			}
-// 		}
-// 	}
-// 	fmt.Println(minOps)
-
-// 	return minOps
-// }
-
 func solutionOptimized(args []int32) int32 {
 	var size = len(args)
 	if size < 3 {
@@ -102,8 +53,6 @@ func solutionOptimized(args []int32) int32 {
 				move += v[i][j]
 			}
 
-			//fmt.Println(i, v[i], move)
-
 			// Update answer
 			if ans > move {
 				ans = move
@@ -115,20 +64,20 @@ func solutionOptimized(args []int32) int32 {
 	return int32(ans)
 }
 
-func TestFindCount(t *testing.T) {
+func TestSolution(t *testing.T) {
 
 	cases := []struct {
 		Args           []int32
 		ExpectedOutput int32
 	}{
-		// {[]int32{1, 2, 3, 4, 5, 3, 2}, 2},
-		// {[]int32{64, 30, 25, 33, 2, 2}, 3},
-		// {[]int32{1, 2, 3, 4, 4, 3}, 6},
-		// {[]int32{1, 2, 3, 4, 5, 6, 7, 8, 22, 11, 24, 13, 3}, 34},
+		{[]int32{1, 2, 3, 4, 5, 3, 2}, 2},
+		{[]int32{64, 30, 25, 33, 2, 2}, 3},
+		{[]int32{1, 2, 3, 4, 4, 3}, 6},
+		{[]int32{1, 2, 3, 4, 5, 6, 7, 8, 22, 11, 24, 13, 3}, 34},
 		{[]int32{1, 2, 3, 4, 5, 6, 7, 8, 3333, 123211, 134234, 23121, 2323, 12421, 1212, 2323, 22, 333, 13213, 222, 15123, 1222, 3333, 11, 24, 13, 3}, 34},
 	}
 
-	t.Run("Test FindCount", func(t *testing.T) {
+	t.Run("Test Solution", func(t *testing.T) {
 		for _, tc := range cases {
 			var actualOutput int32 = solutionOptimized(tc.Args) //, len(tc.Args[0])-1)
 			if tc.ExpectedOutput != actualOutput {

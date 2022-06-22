@@ -16,52 +16,25 @@ import (
  * The function accepts 2D_LONG_INTEGER_ARRAY sides as parameter.
  */
 
-func sumN(n int64) int64 {
-	var sum int64 = 0
-	var i int64
-	for i = 1; i < n; i++ {
-		sum += i
-	}
-	fmt.Println(n)
-	fmt.Println(sum)
-	return sum
-}
-
 func nearlySimilarRectangles(sides [][]int64) int64 {
 	// Write your code here
 	size := len(sides)
 	if size < 2 {
 		return 0
 	}
-	var ratios []float64
+	// var ratios []float64
+	var ratios = make(map[float64]int64)
 
 	for i := 0; i < size; i++ {
 		ratio := float64(sides[i][0]) / float64(sides[i][1])
-		ratios = append(ratios, ratio)
+		ratios[ratio]++
+		// ratios = append(ratios, ratio)
 	}
-	if size == 2 {
-		if ratios[0] == ratios[1] {
-			return 2
-		} else {
-			return 0
-		}
+	var cnt int64
+	for _, v := range ratios {
+		cnt += v * (v - 1) / 2
 	}
 
-	var cnt int64
-	for len(ratios) > 1 {
-		var cnt_inner int64
-		for i := 1; i < len(ratios); i++ {
-			if ratios[0] == ratios[i] {
-				cnt_inner++
-				ratios = append(ratios[:i], ratios[i+1:]...)
-				i--
-			}
-		}
-		fmt.Println("cnti", cnt_inner)
-		cnt += sumN(cnt_inner + 1)
-		fmt.Println("cnt", cnt)
-		ratios = ratios[1:]
-	}
 	return cnt
 }
 
