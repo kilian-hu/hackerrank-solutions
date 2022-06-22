@@ -15,24 +15,26 @@ import sys
 #
 
 def maxSubarrayValue(arr):
-    # Gets timeouts.
-    even = [0]
-    odd = [0]
-    for i in range(len(arr)):
-        if i % 2 == 0:
-            even.append(even[-1] + arr[i])
-            odd.append(odd[-1])
+    max_p, max_n, sum_p, sum_n,size =0,0,0,0,len(arr)
+    for i in range(size):
+        val = arr[i] if i % 2 == 0 else -arr[i]
+        # for postive
+        if val < sum_p+val:
+            sum_p += val
         else:
-            even.append(even[-1])
-            odd.append(odd[-1] + arr[i])
-    ans = 0
-    for i in range(len(arr)):
-        for j in range(i + 1, len(arr) + 1):
-            a = even[j] - even[i]
-            b = odd[j] - odd[i]
-            ans = max(ans, (a - b)**2)
-    return ans
-    
+            sum_p=val
+        if sum_p > max_p:
+            max_p = sum_p
+        # for negative
+        if val > sum_n+val:
+            sum_n += val
+        else:
+            sum_n=val
+        if sum_n < max_n:
+            max_n = sum_n
+        
+    return max_p**2 if max_p**2 > max_n**2 else max_n**2
+
 if __name__ == '__main__':
     fptr = open(os.environ['OUTPUT_PATH'], 'w')
 
